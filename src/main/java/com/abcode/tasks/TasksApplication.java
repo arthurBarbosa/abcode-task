@@ -1,6 +1,8 @@
 package com.abcode.tasks;
 
 import com.abcode.tasks.domain.task.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @SpringBootApplication
 public class TasksApplication implements RepositoryRestConfigurer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TasksApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(TasksApplication.class, args);
@@ -21,6 +24,11 @@ public class TasksApplication implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Task.class);
+        // TODO: mudar em producao
+        config.getCorsRegistry().addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
+        LOGGER.info("Repository CORS setup... OK!");
     }
 
     @Bean
