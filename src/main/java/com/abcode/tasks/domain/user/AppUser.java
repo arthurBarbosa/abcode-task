@@ -1,6 +1,7 @@
 package com.abcode.tasks.domain.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
@@ -9,8 +10,14 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Nome de usuario obrigatorio")
     private String username;
+
+    @NotEmpty(message = "Senha obrigatoria")
     private String password;
+
+    @NotEmpty(message = "Nome de exibicao obrigatorio")
     private String displayName;
 
     public AppUser() {

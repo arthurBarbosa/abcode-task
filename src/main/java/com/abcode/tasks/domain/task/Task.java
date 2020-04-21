@@ -1,8 +1,12 @@
 package com.abcode.tasks.domain.task;
 
 import com.abcode.tasks.domain.user.AppUser;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -13,14 +17,19 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "Descricao obrigatoria")
+    @Length(min = 3, max = 40, message = "O tamanho da tarefa 'e invalido" )
     private String description;
 
+    @NotNull(message = "A data da tarefa 'e obrigatoria")
+    @FutureOrPresent(message = "A data da tarefa n~ao pode estar no passado")
     private LocalDate whenToDo;
 
     private Boolean done = false;
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
+    @NotNull(message = "O usuario da tarefa 'e obrigatorio")
     private AppUser appUser;
 
     public Task() {
