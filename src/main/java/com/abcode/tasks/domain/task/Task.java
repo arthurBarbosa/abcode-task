@@ -18,7 +18,7 @@ public class Task {
     private Integer id;
 
     @NotEmpty(message = "Descricao obrigatoria")
-    @Length(min = 3, max = 40, message = "O tamanho da tarefa 'e invalido" )
+    @Length(min = 3, max = 40, message = "O tamanho da tarefa 'e invalido")
     private String description;
 
     @NotNull(message = "A data da tarefa 'e obrigatoria")
@@ -29,7 +29,9 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
-    @NotNull(message = "O usuario da tarefa 'e obrigatorio")
+
+    // TODO: habilitar depois
+    //  @NotNull(message = "O usuario da tarefa 'e obrigatorio")
     private AppUser appUser;
 
     public Task() {

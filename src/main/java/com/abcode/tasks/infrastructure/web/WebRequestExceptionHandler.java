@@ -1,5 +1,7 @@
 package com.abcode.tasks.infrastructure.web;
 
+import com.abcode.tasks.domain.task.DuplicateTaskException;
+import com.abcode.tasks.domain.task.TaskRepositoryEventHandler;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +13,13 @@ public class WebRequestExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public RestResponseError handleException(RepositoryConstraintViolationException e){
+    public RestResponseError handleException(RepositoryConstraintViolationException e) {
         return RestResponseError.fromValidationError(e.getErrors());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public RestResponseError handleException(DuplicateTaskException e) {
+        return RestResponseError.fromMessage(e.getMessage());
     }
 }
