@@ -28,7 +28,7 @@ public class InsertDataInitial {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        AppUser appUser = new AppUser(null, "Jhon Papa", encoder.encode("abc"), "Jhon coder");
+        AppUser appUser = new AppUser(null, "john", encoder.encode("abc"), "Jhon coder");
         appUserRepository.save(appUser);
 
         LocalDate baseDate = LocalDate.parse("2025-03-16");
