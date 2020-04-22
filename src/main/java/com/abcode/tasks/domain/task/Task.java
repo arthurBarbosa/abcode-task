@@ -1,6 +1,7 @@
 package com.abcode.tasks.domain.task;
 
 import com.abcode.tasks.domain.user.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -30,9 +31,8 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
-
-    // TODO: habilitar depois
-    //  @NotNull(message = "O usuario da tarefa 'e obrigatorio")
+    @NotNull(message = "O usuario da tarefa 'e obrigatorio")
+    @JsonIgnore
     private AppUser appUser;
 
     public Task() {
