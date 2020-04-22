@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@EntityListeners(TaskListenter.class)
 public class Task {
 
     @Id
